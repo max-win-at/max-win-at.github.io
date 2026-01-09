@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About MaxWin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;700&display=swap');
+
+        :root {
+            --bg-dark: #0f172a;
+            --accent-primary: #38bdf8;
+            --accent-secondary: #818cf8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: #f1f5f9;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 25%),
+                radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.05) 0%, transparent 25%);
+            min-height: 100vh;
+        }
+
+        .mono { font-family: 'Fira Code', monospace; }
+
+        .profile-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .image-container::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 50%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .link-btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .link-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-primary);
+            background: rgba(56, 189, 248, 0.1);
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center justify-center p-6 sm:p-12">
+
+    <main class="max-w-2xl w-full">
+        <div class="profile-card rounded-3xl p-8 sm:p-12 text-center">
+            
+            <!-- Avatar Section -->
+            <div class="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-8 image-container">
+                <img 
+                    src="avatar-linux.png" 
+                    alt="MaxWin Profile" 
+                    class="rounded-full w-full h-full object-cover shadow-2xl bg-slate-800"
+                    onerror="this.src='https://ui-avatars.com/api/?name=Max+Win&background=0D8ABC&color=fff&size=256'"
+                >
+            </div>
+
+            <!-- Title & Tagline -->
+            <h1 class="text-4xl sm:text-5xl font-bold mb-3 tracking-tight">
+                About <span class="gradient-text">MaxWin</span>
+            </h1>
+            <p class="mono text-sm sm:text-base text-sky-400 mb-8 font-medium">
+                &gt; "Limitations foster creativity."
+            </p>
+
+            <!-- Bio Description -->
+            <div class="text-slate-400 leading-relaxed text-left space-y-4 mb-10 text-sm sm:text-base">
+                <p>
+                    Passionate about building robust systems and exploring the intersection of design and functionality. 
+                    With a deep appreciation for open-source philosophy, I believe that the best solutions often arise 
+                    from the most constrained environments.
+                </p>
+                <p>
+                    Whether I'm optimizing performance or crafting intuitive user interfaces, my goal is to turn technical 
+                    complexities into elegant, creative results.
+                </p>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://www.linkedin.com/in/markus-winter-90254073/" target="_blank" rel="noopener noreferrer" class="link-btn px-6 py-3 rounded-xl flex items-center justify-center gap-3 bg-slate-800/50">
+                    <i class="fab fa-linkedin text-xl text-sky-500"></i>
+                    <span class="font-semibold text-sm">LinkedIn</span>
+                </a>
+                
+                <a href="https://stackoverflow.com/users/97577/maxwin" target="_blank" rel="noopener noreferrer" class="link-btn px-6 py-3 rounded-xl flex items-center justify-center gap-3 bg-slate-800/50">
+                    <i class="fab fa-stack-overflow text-xl text-orange-500"></i>
+                    <span class="font-semibold text-sm">StackOverflow</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center">
+            <p class="mono text-xs text-slate-500 opacity-50 uppercase tracking-widest">
+                System Status: Busy ⏳
+            </p>
+        </footer>
+    </main>
+
+</body>
+</html>
