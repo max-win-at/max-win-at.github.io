@@ -56,7 +56,8 @@
 
                 <!-- Stats as Distro Info -->
                 <div class="neofetch-stats">
-                    <div class="neofetch-header">friend@max-w.in</div>
+                    <div class="neofetch-header"><span style="color: var(--text-primary);">Max</span><span
+                            style="color: var(--accent-cyan);">Win</span></div>
                     <div class="neofetch-separator">─────────────────</div>
 
                     <div class="neofetch-line">
@@ -96,17 +97,20 @@
                 <div class="cli-app-container">
                     <a href="https://www.linkedin.com/in/markus-winter-90254073/" target="_blank"
                         rel="noopener noreferrer" class="cli-btn">
+                        <span class="cli-btn-number">1.</span>
                         <i class="fab fa-linkedin cli-btn-icon linkedin"></i>
                         <span class="cli-btn-text">LinkedIn</span>
                     </a>
 
                     <a href="https://stackoverflow.com/users/97577/maxwin" target="_blank" rel="noopener noreferrer"
                         class="cli-btn">
+                        <span class="cli-btn-number">2.</span>
                         <i class="fab fa-stack-overflow cli-btn-icon stackoverflow"></i>
                         <span class="cli-btn-text">StackOverflow</span>
                     </a>
 
                     <button @click="openModal()" :disabled="isSent" class="cli-btn">
+                        <span class="cli-btn-number">3.</span>
                         <i
                             :class="isSent ? 'fas fa-check-circle cli-btn-icon contact' : 'fas fa-paper-plane cli-btn-icon contact'"></i>
                         <span class="cli-btn-text" x-text="isSent ? 'Message Sent' : 'Get In Touch'"></span>

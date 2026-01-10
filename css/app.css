@@ -142,7 +142,7 @@ body {
 .neofetch-output {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 20px;
+    gap: 24px;
     margin: 16px 0;
     padding: 8px 0;
 }
@@ -150,12 +150,12 @@ body {
 .neofetch-logo {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .neofetch-logo img {
-    width: 120px;
-    height: 120px;
+    width: 300px;
+    height: 300px;
     border-radius: 8px;
     border: 2px solid var(--terminal-border);
     object-fit: cover;
@@ -165,6 +165,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .neofetch-header {
@@ -180,16 +182,25 @@ body {
 
 .neofetch-line {
     display: flex;
-    flex-wrap: wrap;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
 }
 
 .neofetch-label {
     color: var(--accent-cyan);
     min-width: 80px;
+    flex-shrink: 0;
 }
 
 .neofetch-value {
     color: var(--text-primary);
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
 }
 
 .neofetch-bio {
@@ -227,10 +238,9 @@ body {
     position: relative;
 }
 
-.cli-btn::before {
-    content: '❯';
-    color: var(--prompt-green);
-    font-weight: bold;
+.cli-btn-number {
+    color: var(--accent-cyan);
+    font-weight: 600;
 }
 
 .cli-btn:hover {
@@ -439,33 +449,34 @@ body {
 
     .terminal-content {
         padding: 16px;
-        font-size: 11px;
     }
 
     .neofetch-output {
         grid-template-columns: 1fr;
-        text-align: center;
+        text-align: left;
     }
 
     .neofetch-logo {
         margin-bottom: 8px;
-    }
-
-    .neofetch-logo img {
-        width: 100px;
-        height: 100px;
-    }
-
-    .neofetch-stats {
-        align-items: center;
-    }
-
-    .neofetch-line {
         justify-content: center;
     }
 
+    .neofetch-logo img {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+    }
+
+    .neofetch-stats {
+        align-items: flex-start;
+    }
+
+    .neofetch-line {
+        justify-content: flex-start;
+    }
+
     .neofetch-bio {
-        text-align: center;
+        text-align: left;
     }
 
     .cli-app-container {
@@ -474,7 +485,7 @@ body {
 
     .cli-btn {
         width: 100%;
-        justify-content: center;
+        justify-content: left;
     }
 }
 
