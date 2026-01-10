@@ -13,87 +13,13 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/htmx.org@2.0.0"></script>
 
+    <!-- Tailwind CSS & Font Awesome -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;600;700&display=swap');
 
-        :root {
-            --bg-dark: #0f172a;
-            --accent-primary: #38bdf8;
-            --accent-secondary: #818cf8;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
-            color: #f1f5f9;
-            background-image:
-                radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 25%),
-                radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.05) 0%, transparent 25%);
-            min-height: 100vh;
-        }
-
-        .mono {
-            font-family: 'Fira Code', monospace;
-        }
-
-        .profile-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .image-container::after {
-            content: '';
-            position: absolute;
-            inset: -4px;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            border-radius: 50%;
-            z-index: -1;
-            opacity: 0.5;
-        }
-
-        .link-btn {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .link-btn:not(:disabled):hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-primary);
-            background: rgba(56, 189, 248, 0.1);
-        }
-
-        .link-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            filter: grayscale(0.5);
-        }
-
-        /* Modal Styles */
-        .modal-overlay {
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(4px);
-            transition: opacity 0.3s ease;
-        }
-
-        .modal-content {
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-        }
-
-        .modal-active .modal-content {
-            transform: scale(1);
-        }
-    </style>
+    <!-- App Styles & Scripts -->
+    <link rel="stylesheet" href="css/app.css">
+    <script src="js/app.js"></script>
 </head>
 
 <body class="flex flex-col items-center justify-center p-6 sm:p-12 min-h-screen">
@@ -215,88 +141,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Alpine.js Component Definition (ViewModel) -->
-    <script>
-        function contactApp() {
-            return {
-                // State (Model)
-                isModalOpen: false,
-                isSent: false,
-                isSubmitting: false,
-                hasError: false,
-                statusMessage: '',
-                form: {
-                    email: '',
-                    message: ''
-                },
-
-                // Lifecycle
-                init() {
-                    this.checkSentStatus();
-                },
-
-                // Methods (ViewModel actions)
-                checkSentStatus() {
-                    if (sessionStorage.getItem('maxwin_contact_sent')) {
-                        this.isSent = true;
-                    }
-                },
-
-                openModal() {
-                    if (this.isSent) return;
-                    this.isModalOpen = true;
-                    document.body.style.overflow = 'hidden';
-                },
-
-                closeModal() {
-                    this.isModalOpen = false;
-                    document.body.style.overflow = 'auto';
-                },
-
-                async submitForm(formEl) {
-                    this.isSubmitting = true;
-                    this.hasError = false;
-                    this.statusMessage = '';
-
-                    const formData = new FormData(formEl);
-
-                    try {
-                        const response = await fetch(formEl.action, {
-                            method: 'POST',
-                            body: formData,
-                            headers: { 'Accept': 'application/json' }
-                        });
-
-                        if (response.ok) {
-                            sessionStorage.setItem('maxwin_contact_sent', 'true');
-                            this.statusMessage = 'Success! Message dispatched.';
-                            this.hasError = false;
-
-                            setTimeout(() => {
-                                this.closeModal();
-                                this.isSent = true;
-                            }, 1500);
-                        } else {
-                            throw new Error();
-                        }
-                    } catch (err) {
-                        this.statusMessage = 'Transmission Error. Try again.';
-                        this.hasError = true;
-                    } finally {
-                        this.isSubmitting = false;
-                    }
-                }
-            };
-        }
-    </script>
-
-    <!-- Prevent flash of unstyled content for x-cloak -->
-    <style>
-        [x-cloak] {
-            display: none !important;
-        }
-    </style>
 </body>
 
 </html>
