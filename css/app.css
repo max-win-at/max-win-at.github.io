@@ -343,6 +343,27 @@ body {
     margin: 24px 0 16px 0;
 }
 
+.cli-splash {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 12px;
+}
+
+.splash-logo {
+    font-size: 14px;
+}
+
+.splash-text {
+    color: var(--text-dim);
+}
+
+.splash-check {
+    color: var(--accent-green);
+    font-weight: bold;
+}
+
 .cli-app-container {
     display: flex;
     flex-wrap: wrap;

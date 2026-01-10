@@ -99,16 +99,18 @@
         <!-- Terminal Content -->
         <div class="terminal-content">
 
-            <!-- First CLI Command: neofetch -->
+            <!-- First CLI Command: neofetch (always visible, command typed) -->
             <div class="cli-prompt">
                 <span class="prompt-user">friend</span><span class="prompt-at">@</span><span
                     class="prompt-host">max-w.in</span><span class="prompt-colon">:</span><span
                     class="prompt-path">~</span><span class="prompt-symbol">$</span>
-                <span class="prompt-command">neofetch</span>
+                <span class="prompt-command" x-text="typedCommand1"></span><span x-show="showCursor1"
+                    class="cursor"></span>
             </div>
 
-            <!-- Neofetch Output -->
-            <div class="neofetch-output">
+            <!-- Neofetch Output (shown after typing completes) -->
+            <div class="neofetch-output" x-show="bootPhase >= 2" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
                 <!-- Avatar as Distro Logo -->
                 <div class="neofetch-logo">
                     <img src="avatar-linux.png" alt="MaxWin"
@@ -145,17 +147,29 @@
                 </div>
             </div>
 
-            <!-- Second CLI Command: contact max-win -->
-            <div class="cli-app">
+            <!-- Second CLI Command: contact max-win (shown after neofetch) -->
+            <div class="cli-app" x-show="bootPhase >= 2" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
                 <div class="cli-prompt">
                     <span class="prompt-user">friend</span><span class="prompt-at">@</span><span
                         class="prompt-host">max-w.in</span><span class="prompt-colon">:</span><span
                         class="prompt-path">~</span><span class="prompt-symbol">$</span>
-                    <span class="prompt-command">contact max-win</span>
+                    <span class="prompt-command" x-text="typedCommand2"></span><span x-show="showCursor2"
+                        class="cursor"></span>
+                </div>
+
+                <!-- App Splash Output (shown after contact command) -->
+                <div class="cli-splash" x-show="bootPhase >= 4" x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                    <span class="splash-logo">🤙</span>
+                    <span class="splash-text">contact-v42: Discovering options for max-win ...</span>
+                    <span class="splash-check" :class="{ 'loading': splashLoading }" x-text="splashIcon"></span>
                 </div>
 
                 <!-- CLI-Style Buttons (Oh-My-Zsh inspired) -->
-                <div class="cli-app-container">
+                <div class="cli-app-container" x-show="bootPhase >= 5"
+                    x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                    x-transition:enter-end="opacity-100">
                     <a href="https://www.linkedin.com/in/markus-winter-90254073/" target="_blank"
                         rel="noopener noreferrer" class="cli-btn">
                         <span class="cli-btn-number">1.</span>
@@ -179,15 +193,40 @@
                 </div>
             </div>
 
-            <!-- Active Cursor Line -->
-            <div class="cursor-line">
+            <!-- Active Cursor Line (shown at the end) -->
+            <div class="cursor-line" x-show="bootPhase >= 5" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
                 <div class="cli-prompt">
                     <span class="prompt-user">friend</span><span class="prompt-at">@</span><span
                         class="prompt-host">max-w.in</span><span class="prompt-colon">:</span><span
                         class="prompt-path">~</span><span class="prompt-symbol">$</span>
-                    <span x-show="isModalOpenedFromCli || isSent" class="prompt-command">contact max-win 3</span>
+                    <!-- Show typed command during animation only (not when isSent) -->
+                    <span x-show="contactAnimating || isModalOpenedFromCli" class="prompt-command"
+                        x-text="typedCommand3"></span>
+                    <span x-show="showCursor3" class="cursor"></span>
                 </div>
-                <span x-show="!isModalOpenedFromCli && !isSent" class="cursor"></span>
+                <!-- Blinking cursor only after reload when already sent, not immediately after sending -->
+                <span x-show="(!contactAnimating && !isModalOpenedFromCli && !contactSplashVisible) || isSentOnLoad"
+                    class="cursor"></span>
+            </div>
+
+            <!-- Contact Splash (shown during modal animation) -->
+            <div class="cli-splash" x-show="contactSplashVisible" x-transition:enter="transition ease-out duration-200"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                <span class="splash-logo">🤙</span>
+                <span class="splash-text">contact-v42: Getting in touch with max-win ...</span>
+                <span class="splash-check" x-text="contactSplashIcon"></span>
+            </div>
+
+            <!-- New active cursor line below contact splash -->
+            <div class="cursor-line" x-show="contactSplashVisible" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100">
+                <div class="cli-prompt">
+                    <span class="prompt-user">friend</span><span class="prompt-at">@</span><span
+                        class="prompt-host">max-w.in</span><span class="prompt-colon">:</span><span
+                        class="prompt-path">~</span><span class="prompt-symbol">$</span>
+                </div>
+                <span class="cursor"></span>
             </div>
         </div>
 
