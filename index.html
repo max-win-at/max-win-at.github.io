@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About MaxWin</title>
     <!-- Generic 'About' Favicon (User Circle Icon) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2338bdf8'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2338bdf8'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E">
+
+    <!-- Framework CDNs -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -21,13 +28,15 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-dark);
             color: #f1f5f9;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.05) 0%, transparent 25%),
                 radial-gradient(circle at 80% 80%, rgba(129, 140, 248, 0.05) 0%, transparent 25%);
             min-height: 100vh;
         }
 
-        .mono { font-family: 'Fira Code', monospace; }
+        .mono {
+            font-family: 'Fira Code', monospace;
+        }
 
         .profile-card {
             background: rgba(30, 41, 59, 0.7);
@@ -86,185 +95,208 @@
         }
     </style>
 </head>
+
 <body class="flex flex-col items-center justify-center p-6 sm:p-12 min-h-screen">
 
-    <main class="max-w-2xl w-full">
-        <div class="profile-card rounded-3xl p-8 sm:p-12 text-center">
-            
-            <!-- Avatar Section -->
-            <div class="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-8 image-container">
-                <img 
-                    src="avatar-linux.png" 
-                    alt="MaxWin Profile" 
-                    class="rounded-full w-full h-full object-cover shadow-2xl bg-slate-800"
-                    onerror="this.src='https://ui-avatars.com/api/?name=Max+Win&background=0D8ABC&color=fff&size=256'"
-                >
-            </div>
+    <!-- Alpine.js App Component (MVVM ViewModel) -->
+    <div x-data="contactApp()" x-init="init()" class="contents">
+        <main class="max-w-2xl w-full">
+            <div class="profile-card rounded-3xl p-8 sm:p-12 text-center">
 
-            <!-- Title & Tagline -->
-            <h1 class="text-4xl sm:text-5xl font-bold mb-3 tracking-tight">
-                About <span class="gradient-text">MaxWin</span>
-            </h1>
-            <p class="mono text-sm sm:text-base text-sky-400 mb-8 font-medium">
-                &gt; "Limitations foster creativity."
-            </p>
-
-            <!-- Bio Description -->
-            <div class="text-slate-400 leading-relaxed text-left space-y-4 mb-10 text-sm sm:text-base">
-                <p>
-                    Passionate about building robust systems and exploring the intersection of design and functionality. 
-                    With a deep appreciation for open-source philosophy, I believe that the best solutions often arise 
-                    from the most constrained environments.
-                </p>
-                <p>
-                    Whether I'm optimizing performance or crafting intuitive user interfaces, my goal is to turn technical 
-                    complexities into elegant, creative results.
-                </p>
-            </div>
-
-            <!-- Social Links & Contact -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
-                <a href="https://www.linkedin.com/in/markus-winter-90254073/" target="_blank" rel="noopener noreferrer" class="link-btn px-6 py-3 rounded-xl flex items-center justify-center gap-3 bg-slate-800/50">
-                    <i class="fab fa-linkedin text-xl text-sky-500"></i>
-                    <span class="font-semibold text-sm">LinkedIn</span>
-                </a>
-                
-                <a href="https://stackoverflow.com/users/97577/maxwin" target="_blank" rel="noopener noreferrer" class="link-btn px-6 py-3 rounded-xl flex items-center justify-center gap-3 bg-slate-800/50">
-                    <i class="fab fa-stack-overflow text-xl text-orange-500"></i>
-                    <span class="font-semibold text-sm">StackOverflow</span>
-                </a>
-
-                <button id="contact-btn" onclick="openModal()" class="link-btn px-6 py-3 rounded-xl flex items-center justify-center gap-3 bg-slate-800/50 text-white">
-                    <i id="contact-icon" class="fas fa-paper-plane text-xl text-emerald-400"></i>
-                    <span id="contact-text" class="font-semibold text-sm">Get In Touch</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Footer -->
-        <footer class="mt-8 text-center">
-            <p class="mono text-xs text-slate-500 opacity-50 uppercase tracking-widest">
-                System Status: Creative // Powered by Linux
-            </p>
-        </footer>
-    </main>
-
-    <!-- Modal Structure -->
-    <div id="contact-modal" class="fixed inset-0 z-50 flex items-center justify-center hidden p-4">
-        <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
-        <div class="modal-content relative bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl p-6 sm:p-8 z-10">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold gradient-text mono">Contact MaxWin</h3>
-                <button onclick="closeModal()" class="text-slate-400 hover:text-white">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            
-            <form id="contact-form" action="https://formspree.io/f/mwvvekjn" method="POST" class="space-y-5">
-                <div>
-                    <label class="block text-xs uppercase tracking-widest text-slate-500 font-bold mb-2 mono">Your Email</label>
-                    <input type="email" name="email" required placeholder="name@example.com"
-                        class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition-colors">
+                <!-- Avatar Section -->
+                <div class="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-8 image-container">
+                    <img src="avatar-linux.png" alt="MaxWin Profile"
+                        class="rounded-full w-full h-full object-cover shadow-2xl bg-slate-800"
+                        onerror="this.src='https://ui-avatars.com/api/?name=Max+Win&background=0D8ABC&color=fff&size=256'">
                 </div>
-                <div>
-                    <label class="block text-xs uppercase tracking-widest text-slate-500 font-bold mb-2 mono">Your Message</label>
-                    <textarea name="message" required rows="4" placeholder="Hello! I'd like to collaborate..."
-                        class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition-colors"></textarea>
+
+                <!-- Title & Tagline -->
+                <h1 class="text-4xl sm:text-5xl font-bold mb-3 tracking-tight">
+                    About <span class="gradient-text">MaxWin</span>
+                </h1>
+                <p class="mono text-sm sm:text-base text-sky-400 mb-8 font-medium">
+                    &gt; "Limitations foster creativity."
+                </p>
+
+                <!-- Bio Description -->
+                <div class="text-slate-400 leading-relaxed text-left space-y-4 mb-10 text-sm sm:text-base">
+                    <p>
+                        Passionate about building robust systems and exploring the intersection of design and
+                        functionality.
+                        With a deep appreciation for open-source philosophy, I believe that the best solutions often
+                        arise
+                        from the most constrained environments.
+                    </p>
+                    <p>
+                        Whether I'm optimizing performance or crafting intuitive user interfaces, my goal is to turn
+                        technical
+                        complexities into elegant, creative results.
+                    </p>
                 </div>
-                
-                <button type="submit" id="submit-btn" class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2">
-                    <span id="btn-spinner" class="hidden"><i class="fas fa-circle-notch fa-spin"></i></span>
-                    <span id="btn-text">Send Message</span>
-                </button>
-                
-                <p id="form-status" class="text-xs text-center hidden mono uppercase tracking-tighter"></p>
-            </form>
+
+                <!-- Social Links & Contact -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center flex-wrap">
+                    <a href="https://www.linkedin.com/in/markus-winter-90254073/" target="_blank"
+                        rel="noopener noreferrer"
+                        class="link-btn px-6 py-3 rounded-xl flex items-center justify-center gap-3 bg-slate-800/50">
+                        <i class="fab fa-linkedin text-xl text-sky-500"></i>
+                        <span class="font-semibold text-sm">LinkedIn</span>
+                    </a>
+
+                    <a href="https://stackoverflow.com/users/97577/maxwin" target="_blank" rel="noopener noreferrer"
+                        class="link-btn px-6 py-3 rounded-xl flex items-center justify-center gap-3 bg-slate-800/50">
+                        <i class="fab fa-stack-overflow text-xl text-orange-500"></i>
+                        <span class="font-semibold text-sm">StackOverflow</span>
+                    </a>
+
+                    <button @click="openModal()" :disabled="isSent"
+                        class="link-btn px-6 py-3 rounded-xl flex items-center justify-center gap-3 bg-slate-800/50 text-white">
+                        <i
+                            :class="isSent ? 'fas fa-check-circle text-xl text-emerald-400' : 'fas fa-paper-plane text-xl text-emerald-400'"></i>
+                        <span class="font-semibold text-sm" x-text="isSent ? 'Message Sent' : 'Get In Touch'"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="mt-8 text-center">
+                <p class="mono text-xs text-slate-500 opacity-50 uppercase tracking-widest">
+                    System Status: Creative // Powered by Linux
+                </p>
+            </footer>
+        </main>
+
+        <!-- Modal Structure -->
+        <div x-show="isModalOpen" x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 flex items-center justify-center p-4" x-cloak>
+            <div class="modal-overlay absolute inset-0" @click="closeModal()"></div>
+            <div class="modal-content relative bg-slate-900 border border-slate-700 w-full max-w-md rounded-2xl shadow-2xl p-6 sm:p-8 z-10"
+                x-show="isModalOpen" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 scale-100"
+                x-transition:leave-end="opacity-0 scale-95" @click.stop>
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold gradient-text mono">Contact MaxWin</h3>
+                    <button @click="closeModal()" class="text-slate-400 hover:text-white">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Form with htmx attributes for HATEOAS extensibility -->
+                <form @submit.prevent="submitForm($event.target)" action="https://formspree.io/f/mwvvekjn" method="POST"
+                    hx-post="https://formspree.io/f/mwvvekjn" hx-target="#form-status" hx-swap="innerHTML"
+                    hx-indicator="#btn-spinner" class="space-y-5">
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-slate-500 font-bold mb-2 mono">Your
+                            Email</label>
+                        <input type="email" name="email" x-model="form.email" required placeholder="name@example.com"
+                            class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-widest text-slate-500 font-bold mb-2 mono">Your
+                            Message</label>
+                        <textarea name="message" x-model="form.message" required rows="4"
+                            placeholder="Hello! I'd like to collaborate..."
+                            class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-sky-500 transition-colors"></textarea>
+                    </div>
+
+                    <button type="submit" :disabled="isSubmitting"
+                        class="w-full bg-sky-600 hover:bg-sky-500 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2">
+                        <span x-show="isSubmitting" id="btn-spinner"><i class="fas fa-circle-notch fa-spin"></i></span>
+                        <span x-text="isSubmitting ? 'Sending...' : 'Send Message'"></span>
+                    </button>
+
+                    <p id="form-status" x-show="statusMessage" x-text="statusMessage"
+                        :class="hasError ? 'text-rose-400' : 'text-emerald-400'"
+                        class="text-xs text-center mono uppercase tracking-tighter"></p>
+                </form>
+            </div>
         </div>
     </div>
 
+    <!-- Alpine.js Component Definition (ViewModel) -->
     <script>
-        const modal = document.getElementById('contact-modal');
-        const contactBtn = document.getElementById('contact-btn');
-        const contactIcon = document.getElementById('contact-icon');
-        const contactText = document.getElementById('contact-text');
-        const contactForm = document.getElementById('contact-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const btnText = document.getElementById('btn-text');
-        const btnSpinner = document.getElementById('btn-spinner');
-        const statusMsg = document.getElementById('form-status');
+        function contactApp() {
+            return {
+                // State (Model)
+                isModalOpen: false,
+                isSent: false,
+                isSubmitting: false,
+                hasError: false,
+                statusMessage: '',
+                form: {
+                    email: '',
+                    message: ''
+                },
 
-        // Check if already sent this session
-        function checkSentStatus() {
-            if (sessionStorage.getItem('maxwin_contact_sent')) {
-                setButtonAsSent();
-            }
-        }
+                // Lifecycle
+                init() {
+                    this.checkSentStatus();
+                },
 
-        function setButtonAsSent() {
-            if (contactBtn) {
-                contactBtn.disabled = true;
-                contactIcon.className = "fas fa-check-circle text-xl text-emerald-400";
-                contactText.innerText = "Message Sent";
-            }
-        }
+                // Methods (ViewModel actions)
+                checkSentStatus() {
+                    if (sessionStorage.getItem('maxwin_contact_sent')) {
+                        this.isSent = true;
+                    }
+                },
 
-        function openModal() {
-            if (sessionStorage.getItem('maxwin_contact_sent')) return;
-            modal.classList.remove('hidden');
-            setTimeout(() => modal.classList.add('modal-active'), 10);
-            document.body.style.overflow = 'hidden';
-        }
+                openModal() {
+                    if (this.isSent) return;
+                    this.isModalOpen = true;
+                    document.body.style.overflow = 'hidden';
+                },
 
-        function closeModal() {
-            modal.classList.remove('modal-active');
-            setTimeout(() => modal.classList.add('hidden'), 300);
-            document.body.style.overflow = 'auto';
-        }
+                closeModal() {
+                    this.isModalOpen = false;
+                    document.body.style.overflow = 'auto';
+                },
 
-        // Form Submission Handling
-        contactForm.onsubmit = async (e) => {
-            e.preventDefault();
-            
-            // UI Loading State
-            submitBtn.disabled = true;
-            btnSpinner.classList.remove('hidden');
-            btnText.innerText = "Sending...";
-            statusMsg.classList.add('hidden');
+                async submitForm(formEl) {
+                    this.isSubmitting = true;
+                    this.hasError = false;
+                    this.statusMessage = '';
 
-            const formData = new FormData(contactForm);
-            
-            try {
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
+                    const formData = new FormData(formEl);
 
-                if (response.ok) {
-                    // Success logic
-                    sessionStorage.setItem('maxwin_contact_sent', 'true');
-                    statusMsg.innerText = "Success! Message dispatched.";
-                    statusMsg.className = "text-xs text-center block mono uppercase text-emerald-400 mt-2";
-                    
-                    setTimeout(() => {
-                        closeModal();
-                        setButtonAsSent();
-                    }, 1500);
-                } else {
-                    throw new Error();
+                    try {
+                        const response = await fetch(formEl.action, {
+                            method: 'POST',
+                            body: formData,
+                            headers: { 'Accept': 'application/json' }
+                        });
+
+                        if (response.ok) {
+                            sessionStorage.setItem('maxwin_contact_sent', 'true');
+                            this.statusMessage = 'Success! Message dispatched.';
+                            this.hasError = false;
+
+                            setTimeout(() => {
+                                this.closeModal();
+                                this.isSent = true;
+                            }, 1500);
+                        } else {
+                            throw new Error();
+                        }
+                    } catch (err) {
+                        this.statusMessage = 'Transmission Error. Try again.';
+                        this.hasError = true;
+                    } finally {
+                        this.isSubmitting = false;
+                    }
                 }
-            } catch (err) {
-                // Error logic
-                statusMsg.innerText = "Transmission Error. Try again.";
-                statusMsg.className = "text-xs text-center block mono uppercase text-rose-400 mt-2";
-                submitBtn.disabled = false;
-                btnSpinner.classList.add('hidden');
-                btnText.innerText = "Send Message";
-            }
-        };
-
-        // Initialize status on load
-        window.onload = checkSentStatus;
+            };
+        }
     </script>
+
+    <!-- Prevent flash of unstyled content for x-cloak -->
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
 </body>
+
 </html>
