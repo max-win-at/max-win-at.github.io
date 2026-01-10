@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>friend@max-w.in ~ neofetch</title>
+    <title>About MaxWin</title>
     <!-- Terminal Favicon -->
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235fafff'%3E%3Cpath d='M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10zm-8-8l4 4-4 4-1.4-1.4 2.6-2.6-2.6-2.6L12 10z'/%3E%3C/svg%3E">
@@ -36,7 +36,36 @@
             <div class="terminal-title">Terminal</div>
             <div class="titlebar-controls">
                 <button class="titlebar-btn" title="Search"><i class="fas fa-search"></i></button>
-                <button class="titlebar-btn" title="Menu"><i class="fas fa-bars"></i></button>
+
+                <!-- Hamburger Menu with Dropdown -->
+                <div class="menu-container" x-data="{ menuOpen: false }" @click.outside="menuOpen = false">
+                    <button class="titlebar-btn" title="Menu" @click="menuOpen = !menuOpen">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="dropdown-menu" x-show="menuOpen" x-transition:enter="transition ease-out duration-150"
+                        x-transition:enter-start="opacity-0 transform scale-95 -translate-y-2"
+                        x-transition:enter-end="opacity-100 transform scale-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100"
+                        x-transition:leave-end="opacity-0" x-cloak>
+                        <a href="https://www.linkedin.com/in/markus-winter-90254073/" target="_blank"
+                            rel="noopener noreferrer" class="dropdown-item" @click="menuOpen = false">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="https://stackoverflow.com/users/97577/maxwin" target="_blank" rel="noopener noreferrer"
+                            class="dropdown-item" @click="menuOpen = false">
+                            <i class="fab fa-stack-overflow"></i>
+                            <span>StackOverflow</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" @click="if(!isSent) { openModal(); menuOpen = false; }"
+                            :disabled="isSent" :class="{ 'disabled': isSent }">
+                            <i :class="isSent ? 'fas fa-check-circle' : 'fas fa-paper-plane'"></i>
+                            <span x-text="isSent ? 'Message Sent' : 'Get In Touch'"></span>
+                        </button>
+                    </div>
+                </div>
+
                 <button class="titlebar-btn" title="Minimize"><i class="fas fa-minus"></i></button>
                 <button class="titlebar-btn" title="Maximize"><i class="far fa-square"></i></button>
                 <button class="titlebar-btn close" title="Close"><i class="fas fa-times"></i></button>
@@ -117,7 +146,7 @@
                         <span class="cli-btn-text">StackOverflow</span>
                     </a>
 
-                    <button @click="openModal()" :disabled="isSent" class="cli-btn">
+                    <button @click="openModal(true)" :disabled="isSent" class="cli-btn">
                         <span class="cli-btn-number">3.</span>
                         <i
                             :class="isSent ? 'fas fa-check-circle cli-btn-icon contact' : 'fas fa-paper-plane cli-btn-icon contact'"></i>
@@ -132,9 +161,9 @@
                     <span class="prompt-user">friend</span><span class="prompt-at">@</span><span
                         class="prompt-host">max-w.in</span><span class="prompt-colon">:</span><span
                         class="prompt-path">~</span><span class="prompt-symbol">$</span>
-                    <span x-show="isModalOpen || isSent" class="prompt-command">contact maxwin 3</span>
+                    <span x-show="isModalOpenedFromCli || isSent" class="prompt-command">contact max-win 3</span>
                 </div>
-                <span x-show="!isModalOpen && !isSent" class="cursor"></span>
+                <span x-show="!isModalOpenedFromCli && !isSent" class="cursor"></span>
             </div>
         </div>
 

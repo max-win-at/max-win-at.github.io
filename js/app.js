@@ -8,6 +8,7 @@ function contactApp() {
         // State (Model)
         isModalOpen: false,
         isSent: false,
+        isModalOpenedFromCli: false,
         isSubmitting: false,
         hasError: false,
         statusMessage: '',
@@ -28,14 +29,16 @@ function contactApp() {
             }
         },
 
-        openModal() {
+        openModal(fromCli = false) {
             if (this.isSent) return;
+            this.isModalOpenedFromCli = fromCli;
             this.isModalOpen = true;
             document.body.style.overflow = 'hidden';
         },
 
         closeModal() {
             this.isModalOpen = false;
+            this.isModalOpenedFromCli = false;
             document.body.style.overflow = 'auto';
         },
 

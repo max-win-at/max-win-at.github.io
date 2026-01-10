@@ -114,6 +114,63 @@ body {
     background: #c01c28;
 }
 
+/* Dropdown Menu */
+.menu-container {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
+    background: #3a3a3a;
+    border: 1px solid #4a4a4a;
+    border-radius: 8px;
+    min-width: 180px;
+    padding: 6px 0;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 8px 14px;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-family: 'Fira Code', monospace;
+    font-size: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    text-align: left;
+}
+
+.dropdown-item i {
+    width: 16px;
+    text-align: center;
+    color: var(--text-dim);
+}
+
+.dropdown-item:hover:not(.disabled) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: #4a4a4a;
+    margin: 6px 0;
+}
+
 /* Terminal Content Area */
 .terminal-content {
     padding: 20px;
