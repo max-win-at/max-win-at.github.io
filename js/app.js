@@ -74,14 +74,7 @@ function contactApp() {
                 this.contactSplashIcon = '⏳';
 
                 // Animate hourglass
-                const hourglasses = ['⏳', '⌛'];
-                let idx = 0;
-                const startTime = Date.now();
-                while (Date.now() - startTime < 800) {
-                    this.contactSplashIcon = hourglasses[idx % 2];
-                    idx++;
-                    await this.sleep(150);
-                }
+                await this.animateHourglass(800, 150, (icon) => this.contactSplashIcon = icon);
                 this.contactSplashIcon = '✓';
                 await this.sleep(300);
 
@@ -189,17 +182,7 @@ function contactApp() {
             this.splashLoading = true;
 
             // Animate hourglass for a bit
-            const hourglasses = ['⏳', '⌛'];
-            let hourglassIndex = 0;
-            const loadingDuration = 1200;
-            const toggleInterval = 200;
-            const startTime = Date.now();
-
-            while (Date.now() - startTime < loadingDuration) {
-                this.splashIcon = hourglasses[hourglassIndex % 2];
-                hourglassIndex++;
-                await this.sleep(toggleInterval);
-            }
+            await this.animateHourglass(1200, 200, (icon) => this.splashIcon = icon);
 
             // Show check and buttons
             this.splashLoading = false;
@@ -217,6 +200,17 @@ function contactApp() {
 
         sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));
+        },
+
+        async animateHourglass(durationMs, intervalMs, onUpdate) {
+            const icons = ['⏳', '⌛'];
+            let idx = 0;
+            const startTime = Date.now();
+            while (Date.now() - startTime < durationMs) {
+                onUpdate(icons[idx % 2]);
+                idx++;
+                await this.sleep(intervalMs);
+            }
         }
     };
 }
