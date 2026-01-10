@@ -25,14 +25,22 @@
     <!-- Alpine.js App Component -->
     <div x-data="contactApp()" x-init="init()" class="terminal-window">
 
-        <!-- Terminal Title Bar -->
+        <!-- Terminal Title Bar - GNOME Style -->
         <div class="terminal-titlebar">
-            <div class="traffic-lights">
-                <div class="traffic-light red"></div>
-                <div class="traffic-light yellow"></div>
-                <div class="traffic-light green"></div>
+            <div class="titlebar-left">
+                <svg class="terminal-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10zM7 17l4-4-4-4 1.4-1.4L13.8 13l-5.4 5.4L7 17z" />
+                </svg>
             </div>
-            <div class="terminal-title">friend@max-w.in ~ -bash</div>
+            <div class="terminal-title">Terminal</div>
+            <div class="titlebar-controls">
+                <button class="titlebar-btn" title="Search"><i class="fas fa-search"></i></button>
+                <button class="titlebar-btn" title="Menu"><i class="fas fa-bars"></i></button>
+                <button class="titlebar-btn" title="Minimize"><i class="fas fa-minus"></i></button>
+                <button class="titlebar-btn" title="Maximize"><i class="far fa-square"></i></button>
+                <button class="titlebar-btn close" title="Close"><i class="fas fa-times"></i></button>
+            </div>
         </div>
 
         <!-- Terminal Content -->
@@ -124,64 +132,74 @@
                     <span class="prompt-user">friend</span><span class="prompt-at">@</span><span
                         class="prompt-host">max-w.in</span><span class="prompt-colon">:</span><span
                         class="prompt-path">~</span><span class="prompt-symbol">$</span>
+                    <span x-show="isModalOpen || isSent" class="prompt-command">contact maxwin 3</span>
                 </div>
-                <span class="cursor"></span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Structure -->
-    <div x-show="isModalOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="modal-overlay" x-cloak>
-
-        <div class="modal-content" @click.stop x-show="isModalOpen"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 transform scale-95"
-            x-transition:enter-end="opacity-100 transform scale-100"
-            x-transition:leave="transition ease-in duration-200"
-            x-transition:leave-start="opacity-100 transform scale-100"
-            x-transition:leave-end="opacity-0 transform scale-95">
-
-            <!-- Modal Title Bar -->
-            <div class="modal-titlebar">
-                <span class="modal-title">> contact@max-w.in</span>
-                <button @click="closeModal()" class="modal-close">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <form @submit.prevent="submitForm($event.target)" action="https://formspree.io/f/mwvvekjn" method="POST"
-                    hx-post="https://formspree.io/f/mwvvekjn" hx-target="#form-status" hx-swap="innerHTML"
-                    hx-indicator="#btn-spinner">
-
-                    <div class="form-group">
-                        <label class="form-label">Your Email</label>
-                        <input type="email" name="email" x-model="form.email" required placeholder="name@example.com"
-                            class="form-input">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Your Message</label>
-                        <textarea name="message" x-model="form.message" required rows="4"
-                            placeholder="Hello! I'd like to collaborate..." class="form-textarea"></textarea>
-                    </div>
-
-                    <button type="submit" :disabled="isSubmitting" class="form-submit">
-                        <span x-show="isSubmitting" id="btn-spinner"><i class="fas fa-circle-notch fa-spin"></i></span>
-                        <span x-text="isSubmitting ? 'Sending...' : '> send_message'"></span>
-                    </button>
-
-                    <p id="form-status" x-show="statusMessage" x-text="statusMessage"
-                        :class="hasError ? 'form-status error' : 'form-status success'"></p>
-                </form>
+                <span x-show="!isModalOpen && !isSent" class="cursor"></span>
             </div>
         </div>
 
-        <!-- Click outside to close -->
-        <div class="modal-backdrop" @click="closeModal()" style="position: absolute; inset: 0; z-index: -1;"></div>
+        <!-- Modal Structure - GNOME Window Style -->
+        <div x-show="isModalOpen" x-transition:enter="transition ease-out duration-300"
+            x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0" class="modal-overlay" x-cloak @click="closeModal()">
+
+            <div class="modal-window" @click.stop x-show="isModalOpen"
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="opacity-0 transform scale-95"
+                x-transition:enter-end="opacity-100 transform scale-100"
+                x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100 transform scale-100"
+                x-transition:leave-end="opacity-0 transform scale-95">
+
+                <!-- GNOME Window Title Bar -->
+                <div class="modal-titlebar">
+                    <div class="titlebar-left">
+                        <svg class="terminal-icon" viewBox="0 0 24 24" fill="currentColor"
+                            style="width: 16px; height: 16px;">
+                            <path
+                                d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10z" />
+                            <path d="M6 12h12v2H6z" />
+                        </svg>
+                    </div>
+                    <div class="modal-title">Contact MaxWin</div>
+                    <div class="titlebar-controls">
+                        <button class="titlebar-btn close" @click="closeModal()" title="Close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form @submit.prevent="submitForm($event.target)" action="https://formspree.io/f/mwvvekjn"
+                        method="POST" hx-post="https://formspree.io/f/mwvvekjn" hx-target="#form-status"
+                        hx-swap="innerHTML" hx-indicator="#btn-spinner">
+
+                        <div class="form-group">
+                            <label class="form-label">Your Email</label>
+                            <input type="email" name="email" x-model="form.email" required
+                                placeholder="name@example.com" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Your Message</label>
+                            <textarea name="message" x-model="form.message" required rows="4"
+                                placeholder="Hello! I'd like to collaborate..." class="form-textarea"></textarea>
+                        </div>
+
+                        <button type="submit" :disabled="isSubmitting" class="form-submit">
+                            <span x-show="isSubmitting" id="btn-spinner"><i
+                                    class="fas fa-circle-notch fa-spin"></i></span>
+                            <span x-text="isSubmitting ? 'Sending...' : 'Send Message'"></span>
+                        </button>
+
+                        <p id="form-status" x-show="statusMessage" x-text="statusMessage"
+                            :class="hasError ? 'form-status error' : 'form-status success'"></p>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

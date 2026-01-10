@@ -52,46 +52,66 @@ body {
     overflow: hidden;
 }
 
-/* Terminal Title Bar */
+/* Terminal Title Bar - GNOME Wayland Style */
 .terminal-titlebar {
-    background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
-    padding: 8px 12px;
+    background: #303030;
+    padding: 6px 8px;
     display: flex;
     align-items: center;
     gap: 8px;
     border-bottom: 1px solid var(--terminal-border);
+    border-radius: 8px 8px 0 0;
 }
 
-.traffic-lights {
+.titlebar-left {
     display: flex;
-    gap: 6px;
+    align-items: center;
+    gap: 8px;
 }
 
-.traffic-light {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-}
-
-.traffic-light.red {
-    background: var(--traffic-red);
-}
-
-.traffic-light.yellow {
-    background: var(--traffic-yellow);
-}
-
-.traffic-light.green {
-    background: var(--traffic-green);
+.terminal-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--text-primary);
+    opacity: 0.9;
 }
 
 .terminal-title {
     flex: 1;
     text-align: center;
-    font-size: 12px;
-    color: var(--text-dim);
-    margin-right: 60px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    font-family: 'Inter', 'Cantarell', sans-serif;
+}
+
+.titlebar-controls {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.titlebar-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    font-size: 14px;
+}
+
+.titlebar-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.titlebar-btn.close:hover {
+    background: #c01c28;
 }
 
 /* Terminal Content Area */
@@ -307,11 +327,11 @@ body {
     }
 }
 
-/* Modal Styles */
+/* Modal Styles - GNOME Window */
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(10, 10, 10, 0.9);
+    background: rgba(10, 10, 10, 0.8);
     backdrop-filter: blur(4px);
     z-index: 50;
     display: flex;
@@ -320,42 +340,34 @@ body {
     padding: 16px;
 }
 
-.modal-content {
+.modal-window {
     background: var(--terminal-bg);
     border: 1px solid var(--terminal-border);
-    border-radius: 8px;
+    border-radius: 12px;
     width: 100%;
-    max-width: 400px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+    max-width: 420px;
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    overflow: hidden;
 }
 
 .modal-titlebar {
-    background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 100%);
-    padding: 8px 12px;
+    background: #303030;
+    padding: 6px 8px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 8px;
     border-bottom: 1px solid var(--terminal-border);
-    border-radius: 8px 8px 0 0;
 }
 
 .modal-title {
-    font-size: 12px;
-    color: var(--accent-cyan);
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    color: var(--text-dim);
-    cursor: pointer;
-    font-size: 16px;
-    padding: 0;
-    line-height: 1;
-}
-
-.modal-close:hover {
-    color: var(--traffic-red);
+    flex: 1;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+    font-family: 'Inter', 'Cantarell', sans-serif;
 }
 
 .modal-body {
