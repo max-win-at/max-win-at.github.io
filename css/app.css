@@ -50,6 +50,11 @@ body {
     margin-top: auto;
 }
 
+.footer-link {
+    color: inherit;
+    text-decoration: none;
+}
+
 /* Terminal Window Container */
 .terminal-window {
     background: var(--terminal-bg);
