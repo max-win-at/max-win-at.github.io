@@ -171,6 +171,58 @@ body {
     margin: 6px 0;
 }
 
+/* Search Popup */
+.search-container {
+    position: relative;
+}
+
+.search-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
+    background: #3a3a3a;
+    border: 1px solid #4a4a4a;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.search-logo {
+    width: 20px;
+    height: 20px;
+    color: var(--text-dim);
+    flex-shrink: 0;
+}
+
+.search-input {
+    width: 200px;
+    padding: 8px 12px;
+    background: var(--bg-dark);
+    border: 1px solid #4a4a4a;
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-family: 'Fira Code', monospace;
+    font-size: 12px;
+    outline: none;
+    transition: border-color 0.15s ease;
+}
+
+.search-input:focus {
+    border-color: var(--prompt-host);
+}
+
+.search-input::placeholder {
+    color: var(--text-dim);
+}
+
 /* Terminal Content Area */
 .terminal-content {
     padding: 20px;
