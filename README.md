@@ -6,7 +6,7 @@ A terminal-style personal portfolio page built with Alpine.js and htmx.
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│ 🖥  Terminal                                                           _ □ × │
+│ [>_] Terminal                                                         _ [] x │
 ├──────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
 │  friend@max-w.in:~$ neofetch                                                 │
@@ -24,11 +24,11 @@ A terminal-style personal portfolio page built with Alpine.js and htmx.
 │                                                                              │
 │  friend@max-w.in:~$ contact max-win                                          │
 │                                                                              │
-│  🤙 contact-v42: Discovering options for max-win ... ✓                      │
+│  [*] contact-v42: Discovering options for max-win ... OK                     │
 │                                                                              │
-│     1. 🔗 LinkedIn                                                          │
-│     2. 📚 StackOverflow                                                     │
-│     3. ✉️  Get In Touch                                                     │
+│     1. [in] LinkedIn                                                         │
+│     2. [so] StackOverflow                                                    │
+│     3. [>>] Get In Touch                                                     │
 │                                                                              │
 │  friend@max-w.in:~$ █                                                        │
 │                                                                              │
